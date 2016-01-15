@@ -1,23 +1,38 @@
-//var api = require('./ruter-api')
-var moment = require('moment'),
-TIME_FORMAT = 'HH:mm:ss';
+var api = require('./ruter-api'),
+	_ = require('lodash'),
+	moment = require('moment'),
+	TIME_FORMAT = 'HH:mm:ss';
+
+var info = {
+	isLoaded: false,
+};
+
+var avganger;
+api().then(function(resultat) {
+	avganger = _(resultat)
+		.map(function(linje) {
+			return {
+				name: linje.name,
+				line: linje.line,
+				next: _(linje.next)
+					.map(function(avgang) {
+						return moment().to(avgang);
+					}).value()
+			};
+
+		})
+		.value();
+	info.isLoaded = true;
+	info.lastFetched = moment().format(TIME_FORMAT);
+});
+
+
 
 module.exports = {
 	info: function() {
-		return {
-			isLoaded: true,
-			lastFetched: moment().format(TIME_FORMAT)
-		}
+		return info;
 	},
 	avganger: function() {
-		return [{
-			name: 'Ljabru',
-			line: 18,
-			next: ['om 4 minutter']
-		}, {
-			name: 'Helsfyr',
-			line: 37,
-			next: ['om 5 minutter', 'om 15 minutter']
-		}];
+		return avganger;
 	}
 }
