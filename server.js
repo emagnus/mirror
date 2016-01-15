@@ -14,7 +14,8 @@ app.get('/', function(req, res) {
 	res.render('home', {
 		time: moment().format('HH:mm:ss'),
 		ruter: {
-			info: ruter.info()
+			info: ruter.info(),
+			avganger: ruter.avganger()
 		}
 	});
 });

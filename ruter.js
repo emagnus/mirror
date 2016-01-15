@@ -9,7 +9,7 @@ module.exports = {
 			lastFetched: moment().format(TIME_FORMAT)
 		}
 	},
-	getTime: function() {
+	avganger: function() {
 		return [{
 			name: 'Ljabru',
 			line: 18,
