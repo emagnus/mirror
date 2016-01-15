@@ -8,23 +8,24 @@ var info = {
 };
 
 var avganger;
-api().then(function(resultat) {
-	avganger = _(resultat)
-		.map(function(linje) {
-			return {
-				name: linje.name,
-				line: linje.line,
-				next: _(linje.next)
-					.map(function(avgang) {
-						return moment().to(avgang);
-					}).value()
-			};
+var interval = setInterval(function(){
+	api().then(function(resultat) {
+		avganger = _(resultat)
+			.map(function(linje) {
+				return {
+					name: linje.name,
+					line: linje.line,
+					next: _(linje.next)
+						.map(function(avgang) {
+							return moment().to(avgang);
+						}).value()
+				};
 
-		})
-		.value();
-	info.isLoaded = true;
-	info.lastFetched = moment().format(TIME_FORMAT);
-});
+			})
+			.value();
+		info.isLoaded = true;
+		info.lastFetched = moment().format(TIME_FORMAT);
+	})}, 30000);
 
 
 
