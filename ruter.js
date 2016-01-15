@@ -6,7 +6,7 @@ var rp = require('request-promise'),
 moment.locale('nb');
 
 rp({
-	uri: 'http://reisapi.ruter.no/Favourites/GetFavourites?favouritesRequest=3010625-18-Ljabru',
+	uri: 'http://reisapi.ruter.no/Favourites/GetFavourites?favouritesRequest=3010625-18-Ljabru,3010624-37-Helsfyr',
 	json: true //3010625-18-Ljabru Stopid1-lineid1-destinationtext1
 }).then(function(json) {
 	var arrivals = _(json)
@@ -24,8 +24,11 @@ rp({
 		})
 		.value();
 	console.log(arrivals)
-	var firstArrival = _.first(_.first(arrivals).next);
+	var line = _.find(arrivals, ['line', 37]);
+	console.log('line', line)
+	var firstArrival = _.first(line.next);
 	var now = moment();
+	console.log('name', line.name)
 	console.log('now', now.format(TIME_FORMAT))
 	console.log('firstArrival', firstArrival.format(TIME_FORMAT));
 	console.log('første: ', now.to(firstArrival));
