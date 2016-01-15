@@ -11,17 +11,15 @@ rp({
 }).then(function(json) {
 	var arrivals = _(json)
 		.map(function(line) {
-			return _.first(line.MonitoredStopVisits)
-		})
-		.map(function(visit) {
-			return visit.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime;
-		})
-		.map(function(expectedArrivalTime) {
-			console.log(expectedArrivalTime)
-			return moment(expectedArrivalTime);
+			console.log(line)
+			return {
+				name: line.Destination,
+				line: line.LineID,
+				next: moment(_.first(line.MonitoredStopVisits).MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime) };
 		})
 		.value();
-	var firstArrival = _.first(arrivals);
+	console.log(arrivals)
+	var firstArrival = _.first(arrivals).next;
 	var now = moment();
 	console.log('now', now.format(TIME_FORMAT))
 	console.log('firstArrival', firstArrival.format(TIME_FORMAT));
