@@ -1,4 +1,5 @@
 <h2>Reiseinformasjon fra Ruter</h2>
+{{#if ruter.info.isLoaded}}
 <table>
 <caption>Sist oppdatert: {{ruter.info.lastFetched}}</caption>
 <tr>
@@ -15,3 +16,6 @@
 
   {{/each}}
 </table>
+{{else}}
+Ingen info fra ruter
+{{/if}}
