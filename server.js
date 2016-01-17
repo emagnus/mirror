@@ -14,7 +14,7 @@ app.get('/', function(req, res) {
 	res.render('home', {
 		now: {
 			time: moment().format('HH:mm:ss'),
-			date: moment().format('D MMMM YYYY'),
+			date: moment().format('dddd, D MMMM YYYY'),
 			week: moment().format('w'),
 		},
 		ruter: {
