@@ -27,7 +27,15 @@ app.post('/gotourl', function(req, res) {
 	var theUrl = req.body.url;
 	console.log('sending browser to ' + theUrl);
 	res.send(theUrl);
-	spawn('sh', ['scripts/gotourl.sh', theUrl]);
+	var goToUrl = spawn('sh', ['scripts/gotourl.sh', theUrl]);
+	goToUrl.stdout.on('data', function(data) {
+		console.log(data);
+	});
+	goToUrl.on('exit', function(code) {
+		if (code != 0) {
+			console.log('go to url failed with exit code ' + code);
+		}
+	});
 });
 
 app.listen(3000);
