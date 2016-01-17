@@ -3,7 +3,7 @@
 if [ -z "$1" ]
   then
     echo "Usage: "
-    echo "endreUrl http://news.ycombinator.com"
+    echo "goToUrl http://news.ycombinator.com"
     exit 1
 fi
 
