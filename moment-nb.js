@@ -2,7 +2,7 @@ var moment = require('moment');
 
 moment.locale('nb');
 
-moment.locale('nb-custom', {
+moment.locale('nb', {
 	relativeTime: {
 		future: 'om %s',
 		past: 'for %s siden',
