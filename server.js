@@ -33,7 +33,7 @@ app.post('/gotourl', function(req, res) {
 	var theUrl = req.body.url;
 	console.log('sending browser to ' + theUrl);
 	res.send(theUrl);
-	var goToUrl = spawn('sh', ['scripts/gotourl.sh', theUrl]);
+	var goToUrl = spawn('sh', [ process.env.PWD + '/scripts/gotourl.sh', theUrl]);
 	goToUrl.stdout.on('data', function(data) {
 		console.log(data);
 	});
