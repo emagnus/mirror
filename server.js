@@ -14,18 +14,30 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static('css'));
 app.use(express.static('js'));
+app.use(express.static('views'));
 app.use(express.static('node_modules/moment'));
+app.use(express.static('node_modules/handlebars'));
 app.use('/font', express.static('font'));
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 app.get('/', function(req, res) {
 	res.render('home', {
 		now: {
-			time: moment().format('HH:mm:ss'),
 			date: moment().format('dddd, D MMMM YYYY'),
 			week: moment().format('w'),
 		},
+		ruter: {
+			info: ruter.info(),
+			avganger: ruter.avganger()
+		}
+	});
+});
+
+app.get('/api/ruter', function(req, res) {
+	res.json({
 		ruter: {
 			info: ruter.info(),
 			avganger: ruter.avganger()
