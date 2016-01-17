@@ -11,8 +11,12 @@ app.engine('handlebars', exphbs({
 	defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+
 app.use(express.static('css'));
+app.use(express.static('js'));
+app.use(express.static('node_modules/moment'));
 app.use('/font', express.static('font'));
+
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', function(req, res) {
