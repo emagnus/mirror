@@ -1,21 +1,24 @@
-<h2>Reiseinformasjon fra Ruter</h2>
+<div class="small dimmed">
 {{#if ruter.info.isLoaded}}
 <table>
-<caption>Sist oppdatert: {{ruter.info.lastFetched}}</caption>
+
 <tr>
-    <th>Linje</th>
-    <th>Avgang</th>
   </tr>
   {{#each ruter.avganger}}
 <tr>
     <td>{{line}} - {{name}}</td>
     <td>
-    	{{next}}
+    {{#each next}}
+        {{this}},
+    {{/each}}
+
     </td>
   </tr>
 
   {{/each}}
 </table>
+<span class="xsmall">Sist oppdatert: {{ruter.info.lastFetched}}</span>
 {{else}}
-Ingen info fra ruter
+Ingen info fra Ruter
 {{/if}}
+</div>

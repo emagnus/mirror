@@ -9,6 +9,9 @@ app.engine('handlebars', exphbs({
 	defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+app.use(express.static('css'));
+app.use('/font', express.static('font'));
+
 
 app.get('/', function(req, res) {
 	res.render('home', {
