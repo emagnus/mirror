@@ -34,6 +34,9 @@ module.exports = {
 					name: linje.name,
 					line: linje.line,
 					next: _(linje.next)
+						.filter(function(avgang){
+							return avgang.isBefore(moment().add(1, 'hours'));	
+						})
 						.map(function(avgang) {
 							return moment().to(avgang);
 						}).value()
