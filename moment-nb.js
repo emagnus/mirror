@@ -7,7 +7,7 @@ moment.locale('nb-custom', {
 		future: 'om %s',
 		past: 'for %s siden',
 		s: 'nå',
-		m: 'ett min',
+		m: '1 min',
 		mm: '%d min',
 		h: 'en time',
 		hh: '%d timer',
