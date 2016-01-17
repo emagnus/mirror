@@ -8,12 +8,18 @@ var info = {
 };
 
 var avganger;
-var interval = setInterval(function(){
+
+var hentAvganger = function() {
 	api().then(function(resultat) {
 		avganger = resultat;
 		info.isLoaded = true;
 		info.lastFetched = moment().format(TIME_FORMAT);
-	})}, 30000);
+	})
+};
+
+hentAvganger();
+
+var interval = setInterval(hentAvganger, 30000);
 
 
 
@@ -22,7 +28,7 @@ module.exports = {
 		return info;
 	},
 	avganger: function() {
-		return  _(avganger)
+		return _(avganger)
 			.map(function(linje) {
 				return {
 					name: linje.name,
