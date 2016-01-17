@@ -1,7 +1,7 @@
 var api = require('./ruter-api'),
 	_ = require('lodash'),
 	moment = require('./moment-nb'),
-	TIME_FORMAT = 'HH:mm:ss';
+	TIME_FORMAT = 'HH:mm';
 
 var info = {
 	isLoaded: false,
@@ -39,7 +39,9 @@ module.exports = {
 							return avgang.isBefore(moment().add(1, 'hours'));
 						})
 						.map(function(avgang) {
-							return moment().to(avgang, true);
+							return avgang.isBefore(moment().add(45, 'minute')) ?
+								moment().to(avgang, true) :
+								avgang.format(TIME_FORMAT);
 						}).value()
 				};
 
