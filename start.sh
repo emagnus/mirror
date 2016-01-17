@@ -1,3 +1,3 @@
 #!/bin/sh
 export DISPLAY=:0
-forever start -l mirrorConsole.log -a --uid "mirrorServer" server.js
+forever start -l mirrorConsole.log -a --uid "mirrorServer" -w --watchDirectory . server.js
