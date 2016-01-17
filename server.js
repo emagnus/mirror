@@ -23,6 +23,8 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
+app.set('port', 3000);
+
 app.get('/', function(req, res) {
 	res.render('home', {
 		now: {
@@ -45,6 +47,13 @@ app.get('/api/ruter', function(req, res) {
 	});
 });
 
+app.get('/gohome', function(req, res) {
+	var theUrl = 'http://localhost:' + app.get('port');
+	console.log('sending browser to ' + theUrl);
+	res.send(theUrl);
+	spawn('sh', [ process.env.PWD + '/scripts/goToUrl.sh', theUrl]);
+});
+
 app.post('/gotourl', function(req, res) {
 	var theUrl = req.body.url;
 	console.log('sending browser to ' + theUrl);
@@ -58,9 +67,9 @@ app.post('/gotourl', function(req, res) {
 	});
 	goToUrl.on('exit', function(code) {
 		if (code != 0) {
-			console.log('go to url failed with exit code ' + code);
+			console.log('go to url (' + theUrl + ') failed with exit code ' + code);
 		}
 	});
 });
 
-app.listen(3000);
+app.listen(app.get('port'));
