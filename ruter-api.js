@@ -1,8 +1,6 @@
 var rp = require('request-promise'),
 	_ = require('lodash'),
-	moment = require('moment');
-
-moment.locale('nb');
+	moment = require('./moment-nb');
 
 module.exports = function() {
 	return rp({

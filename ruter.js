@@ -1,6 +1,6 @@
 var api = require('./ruter-api'),
 	_ = require('lodash'),
-	moment = require('moment'),
+	moment = require('./moment-nb'),
 	TIME_FORMAT = 'HH:mm:ss';
 
 var info = {
@@ -28,17 +28,18 @@ module.exports = {
 		return info;
 	},
 	avganger: function() {
+		console.log("hentAvganger")
 		return _(avganger)
 			.map(function(linje) {
 				return {
 					name: linje.name,
 					line: linje.line,
 					next: _(linje.next)
-						.filter(function(avgang){
-							return avgang.isBefore(moment().add(1, 'hours'));	
+						.filter(function(avgang) {
+							return avgang.isBefore(moment().add(1, 'hours'));
 						})
 						.map(function(avgang) {
-							return moment().to(avgang);
+							return moment().to(avgang, true);
 						}).value()
 				};
 
