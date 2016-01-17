@@ -4,7 +4,7 @@ var rp = require('request-promise'),
 
 module.exports = function() {
 	return rp({
-		uri: 'http://reisapi.ruter.no/Favourites/GetFavourites?favouritesRequest=3010625-18-Ljabru,3010625-19-Ljabru,3010624-37-Helsfyr',
+		uri: 'http://reisapi.ruter.no/Favourites/GetFavourites?favouritesRequest=3010625-18-Ljabru,3010625-19-Ljabru,3010624-37-Nydalen',
 		json: true //3010625-18-Ljabru Stopid1-lineid1-destinationtext1
 	}).then(function(json) {
 		console.log('ruter called successfully')
