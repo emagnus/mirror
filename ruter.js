@@ -42,7 +42,8 @@ module.exports = {
 							return avgang.isBefore(moment().add(45, 'minute')) ?
 								moment().to(avgang, true) :
 								avgang.format(TIME_FORMAT);
-						}).value()
+						})
+						.join(', ')
 				};
 
 			})
