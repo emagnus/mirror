@@ -2,17 +2,15 @@
 {{#if ruter.info.isLoaded}}
 <table>
 
-<tr>
+{{#each ruter.avganger}}
+  <tr>
+      <td class="icon-svg icon-svg-{{type}}"></td>
+      <td >{{line}} - {{name}}</td>
+      <td>
+      {{next}}
+      </td>
   </tr>
-  {{#each ruter.avganger}}
-<tr>
-    <td>{{line}} - {{name}}</td>
-    <td>
-    {{next}}
-    </td>
-  </tr>
-
-  {{/each}}
+{{/each}}
 </table>
 <span class="xsmall">Sist oppdatert: {{ruter.info.lastFetched}}</span>
 {{else}}

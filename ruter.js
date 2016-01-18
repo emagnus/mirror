@@ -34,6 +34,7 @@ module.exports = {
 				return {
 					name: linje.name,
 					line: linje.line,
+					type: linje.line > 19 ? 'Bus' : 'Tram',
 					next: _(linje.next)
 						.filter(function(avgang) {
 							return avgang.isBefore(moment().add(1, 'hours'));
