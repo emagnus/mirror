@@ -44,7 +44,6 @@ module.exports = {
 								moment().to(avgang, true) :
 								avgang.format(TIME_FORMAT);
 						})
-						.join(', ')
 				};
 
 			})

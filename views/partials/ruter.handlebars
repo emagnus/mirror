@@ -6,9 +6,11 @@
   <tr>
       <td class="icon-svg icon-svg-{{type}}"></td>
       <td >{{line}} - {{name}}</td>
+      {{#each next}}
       <td>
-      {{next}}
+      {{.}}
       </td>
+      {{/each}}
   </tr>
 {{/each}}
 </table>
