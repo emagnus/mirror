@@ -1,7 +1,7 @@
 (function() {
 
 	var showTime = function() {
-		var now = moment().format('HH:mm:ss');
+		var now = moment().format('HH:mm');
 		$('.time').html(now);
 	};
 	showTime();
