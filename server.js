@@ -28,8 +28,7 @@ app.set('port', 3000);
 app.get('/', function(req, res) {
 	res.render('home', {
 		now: {
-			date: moment().format('dddd, D MMMM YYYY'),
-			week: moment().format('w'),
+			date: moment().format('dddd D MMMM YYYY')
 		},
 		ruter: {
 			info: ruter.info(),
