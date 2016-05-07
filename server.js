@@ -37,6 +37,10 @@ app.get('/', function(req, res) {
 	});
 });
 
+app.get('/mirror-controls', function(req, res) {
+	res.render('mirror-controls', {});
+});
+
 app.get('/api/ruter', function(req, res) {
 	res.json({
 		ruter: {
@@ -55,8 +59,8 @@ app.get('/gohome', function(req, res) {
 
 app.post('/gotourl', function(req, res) {
 	var theUrl = req.body.url;
-	console.log('sending browser to ' + theUrl);
-	res.send(theUrl);
+	console.log('sending mirror-browser to ' + theUrl);
+	res.redirect('/mirror-controls?goto=OK');
 	var goToUrl = spawn('sh', [ process.env.PWD + '/scripts/goToUrl.sh', theUrl]);
 	goToUrl.stdout.on('data', function(data) {
 		console.log('stdout: ' + data);
