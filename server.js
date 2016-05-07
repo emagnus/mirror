@@ -53,7 +53,7 @@ app.get('/api/ruter', function(req, res) {
 app.get('/gohome', function(req, res) {
 	var theUrl = 'http://localhost:' + app.get('port');
 	console.log('sending browser to ' + theUrl);
-	res.send(theUrl);
+	res.redirect('/mirror-controls?home=OK');
 	spawn('sh', [ process.env.PWD + '/scripts/goToUrl.sh', theUrl]);
 });
 
