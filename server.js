@@ -2,6 +2,7 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var moment = require('./moment-nb');
 var ruter = require('./ruter');
+var yr = require('./yr-api');
 var spawn = require('child_process').spawn;
 var bodyParser = require('body-parser');
 
@@ -48,6 +49,17 @@ app.get('/api/ruter', function(req, res) {
 			avganger: ruter.avganger()
 		}
 	});
+});
+
+app.get('/api/yr', function(req, res) {
+	yr()
+	.then(function(forecast){
+		console.log('fds',forecast)
+		res.json(forecast);
+	}).catch(function(err) {
+		 res.status(500).send('Something broke!');
+	});	
+	
 });
 
 app.get('/gohome', function(req, res) {
