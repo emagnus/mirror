@@ -3,7 +3,13 @@
 
 {{#each yr}}
   <tr>
-      <td>{{temperatur}} &deg;</td>
+      <td>{{temperatur}} &deg; / </td>
+      <td>
+      	{{#if nedbor.max}}
+      		{{nedbor.min}} - {{nedbor.max}} mm
+      	{{else}}
+      		{{nedbor.value}} mm	
+      	{{/if}}</td>
   </tr>
 {{/each}}
 </table>
