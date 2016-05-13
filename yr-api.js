@@ -13,7 +13,7 @@ module.exports = function() {
 					reject(err)
 				}
 				var periodicData = result.weatherdata.forecast[0].tabular;
-				var today = moment().add(1, 'day');
+				var today = moment();
 				var todaysForecast =  _(periodicData[0].time)
 					.filter(function(forecast) {
 						return moment(forecast.$.from).isSame(today, 'day')

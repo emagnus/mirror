@@ -52,9 +52,9 @@ app.get('/api/ruter', function(req, res) {
 });
 
 app.get('/api/yr', function(req, res) {
+	console.log('Henter data fra yr');
 	yr()
 	.then(function(forecast){
-		console.log('fds',forecast)
 		res.json(forecast);
 	}).catch(function(err) {
 		 res.status(500).send('Something broke!');

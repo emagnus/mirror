@@ -6,13 +6,12 @@
 
 			var renderApiData = function() {
 				$.getJSON('api/yr').then(function(data) {
-					console.log(data)
 					$('.yr').html(template({yr: data}))
 				})
 			};
 
 			renderApiData();
-			var interval = setInterval(renderApiData, 18000);
+			var interval = setInterval(renderApiData, 1800000);
 
 		});
 
