@@ -9,13 +9,25 @@ rp({
 	parser(r, function(err, result){
 		var periodicData = result.weatherdata.forecast[0].tabular;
 		var today = moment().add(1, 'day');
-		var todaysForcast =  _(periodicData[0].time)
+		var todaysForecast =  _(periodicData[0].time)
 			.filter(function(forecast) {
 				return moment(forecast.$.from).isSame(today, 'day')
 			})
 			.sortBy(function(forecast) { return forecast.$.period;})
+			.map(function(forecast) { 
+				var p = forecast.precipitation[0].$ 
+				return {
+					temperatur: forecast.temperature[0].$.value ,
+					nedbor: {
+						min: p.minvalue,
+						max: p.maxvalue, 
+						value: p.value
+					}
+					
+				}
+			})
 			.value();
-		console.log(todaysForcast[0]);
+		console.log(todaysForecast);
 	})
 	
 }).catch(function(err) {
