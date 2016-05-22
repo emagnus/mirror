@@ -1,3 +1,5 @@
+var logger = require('./logger');
+
 var api = require('./ruter-api'),
 	_ = require('lodash'),
 	moment = require('./moment-nb'),
@@ -28,7 +30,7 @@ module.exports = {
 		return info;
 	},
 	avganger: function() {
-		console.log("hentAvganger")
+		logger.info("hentAvganger")
 		return _(avganger)
 			.map(function(linje) {
 				return {

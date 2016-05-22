@@ -1,3 +1,4 @@
+var logger = require('./logger');
 var express = require('express');
 var exphbs = require('express-handlebars');
 var moment = require('./moment-nb');
@@ -53,7 +54,7 @@ app.get('/api/ruter', function(req, res) {
 });
 
 app.get('/api/yr', function(req, res) {
-	console.log('Henter data fra yr');
+	logger.info('Henter data fra yr');
 	yr()
 	.then(function(forecast){
 		res.json(forecast);
@@ -65,19 +66,19 @@ app.get('/api/yr', function(req, res) {
 
 app.get('/controls/home', function(req, res) {
 	var theUrl = 'http://localhost:' + app.get('port');
-	console.log('sending browser to ' + theUrl);
+	logger.info('sending browser to ' + theUrl);
 	res.redirect('/mirror-controls?home=OK');
 	spawn('sh', [ process.env.PWD + '/scripts/goToUrl.sh', theUrl]);
 });
 
 app.get('/controls/scroll/up', function(req, res) {
-	console.log('scrollUp');
+	logger.info('scrollUp');
 	res.redirect('/mirror-controls');
 	spawn('sh', [ process.env.PWD + '/scripts/scrollUp.sh']);
 });
 
 app.get('/controls/scroll/down', function(req, res) {
-	console.log('scrollDown');
+	logger.info('scrollDown');
 	res.redirect('/mirror-controls');
 	spawn('sh', [ process.env.PWD + '/scripts/scrollDown.sh']);
 });
@@ -85,20 +86,21 @@ app.get('/controls/scroll/down', function(req, res) {
 
 app.post('/controls/url', function(req, res) {
 	var theUrl = req.body.url;
-	console.log('sending mirror-browser to ' + theUrl);
+	logger.info('sending mirror-browser to ' + theUrl);
 	res.redirect('/mirror-controls?url=OK');
 	var goToUrl = spawn('sh', [ process.env.PWD + '/scripts/goToUrl.sh', theUrl]);
 	goToUrl.stdout.on('data', function(data) {
-		console.log('stdout: ' + data);
+		logger.info('stdout: ' + data);
 	});
 	goToUrl.stderr.on('data', function(data) {
-		console.log('stderr: ' + data);
+		logger.error('stderr: ' + data);
 	});
 	goToUrl.on('exit', function(code) {
 		if (code != 0) {
-			console.log('go to url (' + theUrl + ') failed with exit code ' + code);
+			logger.info('go to url (' + theUrl + ') failed with exit code ' + code);
 		}
 	});
 });
 
 app.listen(app.get('port'));
+logger.info('Server running!')
