@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.engine('handlebars', exphbs({
-	defaultLayout: 'main'
+	defaultLayout: 'mirror'
 }));
 app.set('view engine', 'handlebars');
 
@@ -39,7 +39,8 @@ app.get('/', function(req, res) {
 });
 
 app.get('/mirror-controls', function(req, res) {
-	res.render('mirror-controls', {});
+	res.render('mirror-controls', { layout: 'mobile' })
+
 });
 
 app.get('/api/ruter', function(req, res) {
@@ -62,17 +63,30 @@ app.get('/api/yr', function(req, res) {
 	
 });
 
-app.get('/gohome', function(req, res) {
+app.get('/controls/home', function(req, res) {
 	var theUrl = 'http://localhost:' + app.get('port');
 	console.log('sending browser to ' + theUrl);
 	res.redirect('/mirror-controls?home=OK');
 	spawn('sh', [ process.env.PWD + '/scripts/goToUrl.sh', theUrl]);
 });
 
-app.post('/gotourl', function(req, res) {
+app.get('/controls/scroll/up', function(req, res) {
+	console.log('scrollUp');
+	res.redirect('/mirror-controls');
+	spawn('sh', [ process.env.PWD + '/scripts/scrollUp.sh']);
+});
+
+app.get('/controls/scroll/down', function(req, res) {
+	console.log('scrollDown');
+	res.redirect('/mirror-controls');
+	spawn('sh', [ process.env.PWD + '/scripts/scrollDown.sh']);
+});
+
+
+app.post('/controls/url', function(req, res) {
 	var theUrl = req.body.url;
 	console.log('sending mirror-browser to ' + theUrl);
-	res.redirect('/mirror-controls?goto=OK');
+	res.redirect('/mirror-controls?url=OK');
 	var goToUrl = spawn('sh', [ process.env.PWD + '/scripts/goToUrl.sh', theUrl]);
 	goToUrl.stdout.on('data', function(data) {
 		console.log('stdout: ' + data);

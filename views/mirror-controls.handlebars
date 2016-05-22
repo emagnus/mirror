@@ -2,7 +2,7 @@
 		Mirror, mirror on the wall
 </div>	
 
-<form action="/gotourl" method="POST">
+<form action="/controls/url" method="POST">
 	<label> Url
 	<input name="url" type="url"/>
 	</label>
@@ -11,7 +11,17 @@
 
 </form>
 
-<form action="/gohome" method="GET">
+<form action="/controls/home" method="GET">
 	<label>Go home</label>
 	<input type="submit" value="Go home" style="color:white">
+</form>
+
+<form action="/controls/scroll/up" method="GET">
+	<label>Scroll up</label>
+	<input type="submit" value="Scroll up" style="color:white">
+</form>
+
+<form action="/controls/scroll/down" method="GET">
+	<label>Scroll up</label>
+	<input type="submit" value="Scroll down" style="color:white">
 </form>
